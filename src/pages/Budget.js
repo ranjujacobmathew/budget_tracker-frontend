@@ -7,17 +7,17 @@ function Budget() {
   const [data, setData] = useState(null);
   const chartRef = useRef();
 
-  const fetchBudget = async () => {
-    try {
-      const res = await axiosInstance.get(`/monthly-report/?month=${month}`);
-      console.log("data>>>>>>>", res);
-      setData(res.data);
-    } catch (err) {
-      console.error('Failed to fetch budget report', err);
-    }
-  };
-
   useEffect(() => {
+    const fetchBudget = async () => {
+      try {
+        const res = await axiosInstance.get(`/monthly-report/?month=${month}`);
+        console.log("data>>>>>>>", res);
+        setData(res.data);
+      } catch (err) {
+        console.error('Failed to fetch budget report', err);
+      }
+    };
+
     fetchBudget();
   }, [month]);
 
@@ -65,7 +65,6 @@ function Budget() {
     svg.append("g")
       .attr("transform", `translate(${margin.left},0)`)
       .call(d3.axisLeft(y));
-
   }, [data]);
 
   return (
