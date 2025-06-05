@@ -9,11 +9,12 @@ function Dashboard() {
   const categoryChartRef = useRef();
 
   
-  useEffect(() => {
-    axiosInstance.get('/summary/')
-      .then(res => setSummary(res.data))
-      .catch(err => console.error('Error loading summary', err));
-  }, []);
+ useEffect(() => {
+  axiosInstance.get('/summary/')
+    .then(res => setSummary(res.data))
+    .catch(err => console.error('Error loading summary', err));
+}, [axiosInstance]);
+
 
   
   useEffect(() => {
@@ -82,7 +83,7 @@ function Dashboard() {
         setCategoryData(chartData);
       })
       .catch(err => console.error('Error loading transactions for category chart', err));
-  }, []);
+  }, [axiosInstance]);
 
   useEffect(() => {
     if (!categoryData.length) return;

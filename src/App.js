@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/budget" element={<Budget />} />
         <Route path="/login" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
