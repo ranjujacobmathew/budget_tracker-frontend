@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../api/axios';
 import { useNavigate } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');

@@ -10,7 +10,7 @@ function Budget() {
   const fetchBudget = async () => {
     try {
       const res = await axiosInstance.get(`/monthly-report/?month=${month}`);
-      console.log("data>>>>>>>",res)
+      console.log("data>>>>>>>", res);
       setData(res.data);
     } catch (err) {
       console.error('Failed to fetch budget report', err);
@@ -22,10 +22,8 @@ function Budget() {
   }, [month]);
 
   useEffect(() => {
-    if (data) drawChart();
-  }, [data]);
+    if (!data) return;
 
-  const drawChart = () => {
     const chartData = [
       { label: 'Budget', value: data.budget, color: '#4CAF50' },
       { label: 'Expenses', value: data.actual_expenses, color: '#F44336' }
@@ -50,7 +48,7 @@ function Budget() {
       .domain([0, d3.max(chartData, d => d.value)]).nice()
       .range([height - margin.bottom, margin.top]);
 
-    const bar = svg.selectAll("rect")
+    svg.selectAll("rect")
       .data(chartData)
       .enter()
       .append("rect")
@@ -67,7 +65,8 @@ function Budget() {
     svg.append("g")
       .attr("transform", `translate(${margin.left},0)`)
       .call(d3.axisLeft(y));
-  };
+
+  }, [data]);
 
   return (
     <div>
